@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="720" viewBox="0 0 900 720" role="img" aria-labelledby="title desc">
+  <title id="title">Fitnessstudio Trainingsdashboard</title>
+  <desc id="desc">Eine stilisierte Trainingsübersicht mit Wochenplan, Satzdaten und Fortschrittskurve.</desc>
+  <rect width="900" height="720" fill="#fffdfa"/>
+  <rect x="54" y="54" width="792" height="612" rx="18" fill="#f3f1eb" stroke="#d8d0c2" stroke-width="2"/>
+  <rect x="94" y="98" width="252" height="520" rx="12" fill="#214e45"/>
+  <text x="124" y="148" fill="#fffdfa" font-family="Arial, sans-serif" font-size="34" font-weight="800">Push</text>
+  <text x="124" y="184" fill="#d8e8de" font-family="Arial, sans-serif" font-size="18">Heute · Muskelaufbau</text>
+  <rect x="124" y="226" width="172" height="16" rx="8" fill="#d8e8de"/>
+  <rect x="124" y="266" width="132" height="16" rx="8" fill="#d8e8de" opacity=".82"/>
+  <rect x="124" y="306" width="186" height="16" rx="8" fill="#d8e8de" opacity=".7"/>
+  <rect x="124" y="346" width="154" height="16" rx="8" fill="#d8e8de" opacity=".58"/>
+  <circle cx="146" cy="512" r="46" fill="#b45f2a"/>
+  <text x="126" y="522" fill="#fffdfa" font-family="Arial, sans-serif" font-size="24" font-weight="800">8.5</text>
+  <text x="210" y="504" fill="#fffdfa" font-family="Arial, sans-serif" font-size="16" font-weight="700">RPE</text>
+  <text x="210" y="530" fill="#d8e8de" font-family="Arial, sans-serif" font-size="15">saubere Sätze</text>
+  <rect x="386" y="98" width="200" height="142" rx="12" fill="#fffdfa" stroke="#d8d0c2" stroke-width="2"/>
+  <text x="414" y="136" fill="#687066" font-family="Arial, sans-serif" font-size="15" font-weight="700">Wochenvolumen</text>
+  <text x="414" y="190" fill="#1c1f1b" font-family="Arial, sans-serif" font-size="42" font-weight="800">18.420</text>
+  <text x="414" y="216" fill="#687066" font-family="Arial, sans-serif" font-size="17">kg</text>
+  <rect x="622" y="98" width="184" height="142" rx="12" fill="#fffdfa" stroke="#d8d0c2" stroke-width="2"/>
+  <text x="650" y="136" fill="#687066" font-family="Arial, sans-serif" font-size="15" font-weight="700">Einheiten</text>
+  <text x="650" y="194" fill="#1c1f1b" font-family="Arial, sans-serif" font-size="54" font-weight="800">24</text>
+  <rect x="386" y="276" width="420" height="160" rx="12" fill="#fffdfa" stroke="#d8d0c2" stroke-width="2"/>
+  <polyline points="420,392 478,362 536,374 594,326 652,338 710,294 774,314" fill="none" stroke="#214e45" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="420" cy="392" r="9" fill="#b45f2a"/>
+  <circle cx="594" cy="326" r="9" fill="#b45f2a"/>
+  <circle cx="774" cy="314" r="9" fill="#b45f2a"/>
+  <text x="414" y="322" fill="#1c1f1b" font-family="Arial, sans-serif" font-size="22" font-weight="800">Fortschritt</text>
+  <rect x="386" y="472" width="420" height="146" rx="12" fill="#fffdfa" stroke="#d8d0c2" stroke-width="2"/>
+  <rect x="420" y="520" width="72" height="18" rx="9" fill="#214e45"/>
+  <rect x="420" y="560" width="128" height="18" rx="9" fill="#d8d0c2"/>
+  <rect x="592" y="520" width="92" height="18" rx="9" fill="#b45f2a"/>
+  <rect x="592" y="560" width="150" height="18" rx="9" fill="#d8d0c2"/>
+</svg>
