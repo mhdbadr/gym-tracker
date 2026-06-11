@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Gym Tracker PPL</title>
+<style>
+:root{--bg:#f7f8fb;--card:#ffffff;--text:#111827;--muted:#6b7280;--red:#ef4444;--blue:#3b82f6;--green:#22c55e;--line:#e5e7eb;--accent:#f59e0b}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:linear-gradient(180deg,#ffffff 0%,var(--bg) 100%);color:var(--text);padding:14px 14px 90px}.top{position:sticky;top:0;background:linear-gradient(#ffffff 82%,rgba(255,255,255,0));z-index:10;padding:8px 0 14px}h1{font-size:26px;margin:0 0 8px}.sub{color:var(--muted);font-size:14px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.tab{border:0;border-radius:14px;color:white;box-shadow:0 6px 16px rgba(17,24,39,.12);padding:13px 8px;font-weight:800;font-size:16px}.push{background:var(--red)}.pull{background:var(--blue)}.legs{background:var(--green)}.tab.inactive{opacity:.45}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 8px 22px rgba(17,24,39,.08)}.title{display:flex;align-items:center;justify-content:space-between;gap:8px}.title h2{font-size:18px;margin:0}.alt{font-size:12px;color:var(--muted)}.sets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}input,select,textarea{width:100%;border:1px solid var(--line);background:#ffffff;color:var(--text);border-radius:12px;padding:11px;font-size:16px}textarea{min-height:70px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.setbox{background:#f9fafb;border:1px solid var(--line);border-radius:14px;padding:8px}.small{font-size:12px;color:var(--muted);margin-top:8px}.bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:10px}button.action{border:0;border-radius:14px;padding:14px 10px;font-weight:800;font-size:15px}.save{background:var(--accent);color:#111}.clear{background:#e5e7eb;color:#111827}.historyItem{border-top:1px solid var(--line);padding:10px 0}.ok{color:#22c55e;font-weight:700}.warn{color:#f59e0b;font-weight:700}.pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#f3f4f6;color:#374151;font-size:12px;margin-left:6px}@media(min-width:720px){body{max-width:760px;margin:auto}}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Gym Tracker PPL</h1>
+  <div class="sub">Für iPhone: Gewicht + Wiederholungen eintragen. Daten bleiben auf deinem Handy gespeichert.</div>
+  <div class="tabs">
+    <button class="tab push" onclick="setDay('Push')">Push</button>
+    <button class="tab pull inactive" onclick="setDay('Pull')">Pull</button>
+    <button class="tab legs inactive" onclick="setDay('Legs')">Legs</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="row">
+    <div><label>Datum</label><input id="date" type="date"></div>
+    <div><label>Körpergewicht</label><input id="body" type="number" inputmode="decimal" placeholder="75"></div>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <div><label>Energie /10</label><input id="energy" type="number" inputmode="numeric" min="1" max="10" placeholder="8"></div>
+    <div><label>Training</label><input id="day" readonly value="Push"></div>
+  </div>
+</div>
+
+<div id="exercises"></div>
+
+<div class="card">
+  <h2 style="margin-top:0">Notizen</h2>
+  <textarea id="notes" placeholder="z.B. Schulter war gut, Brustpresse nächstes Mal +5 kg"></textarea>
+  <div class="small">Regel: Wenn du 3×12 sauber schaffst → nächstes Mal Gewicht leicht erhöhen.</div>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Letzte Trainings</h2>
+  <div id="history" class="small">Noch keine Einträge.</div>
+</div>
+
+<div class="bar">
+  <button class="action clear" onclick="clearForm()">Leeren</button>
+  <button class="action save" onclick="saveWorkout()">Speichern</button>
+</div>
+
+<script>
+const plans={
+ Push:[['Brustpresse Maschine','Alternative: Kurzhantel Bankdrücken'],['Schrägbank Brustpresse','Alternative: Schrägbank Kurzhanteln'],['Schulterpresse Maschine','Alternative: Kurzhantel Schulterdrücken'],['Seitheben Kurzhanteln','Alternative: Seitheben Maschine'],['Trizeps Pushdown Kabel','Alternative: Seil Pushdown'],['Overhead Trizeps Kabel','Alternative: Kurzhantel Extension'],['Bauch: Crunch Maschine','Alternative: Crunches']],
+ Pull:[['Latzug breit','Alternative: Latzug eng'],['Kabelrudern sitzend','Alternative: Rudern Maschine'],['Chest Supported Row','Alternative: Einarmiges Kurzhantelrudern'],['Face Pulls','Alternative: Reverse Fly Maschine'],['Bizeps Curl Maschine','Alternative: Langhantel Curl'],['Hammer Curls','Alternative: Kabel Hammer Curls'],['Unterarme: Wrist Curls','Alternative: Reverse Wrist Curls'],['Bauch: Beinheben Bank','Alternative: Crunches']],
+ Legs:[['Beinpresse','Alternative: Hack Squat leicht'],['Hack Squat Maschine','Alternative: Kniebeuge Maschine'],['Beinstrecker','Alternative: leichte Ausfallschritte'],['Beinbeuger sitzend','Alternative: Beinbeuger liegend'],['Wadenheben sitzend','Alternative: Wadenheben stehend'],['Bauch: Crunches','Alternative: Plank']]
+};
+let current='Push';
+date.value=new Date().toISOString().slice(0,10);
+function setDay(d){current=d;day.value=d;document.querySelectorAll('.tab').forEach(b=>b.classList.add('inactive'));document.querySelector('.'+d.toLowerCase()).classList.remove('inactive');render();}
+function render(){exercises.innerHTML='';plans[current].forEach((ex,i)=>{let html=`<div class="card"><div class="title"><h2>${i+1}. ${ex[0]}</h2><span class="pill">${current}</span></div><div class="alt">${ex[1]}</div><div class="sets">`;for(let s=1;s<=3;s++){html+=`<div class="setbox"><label>Satz ${s}</label><input id="e${i}s${s}kg" type="number" inputmode="decimal" placeholder="kg"><input id="e${i}s${s}r" type="number" inputmode="numeric" placeholder="Wdh" style="margin-top:6px"></div>`}html+=`</div><div class="small" id="tip${i}"></div></div>`;exercises.insertAdjacentHTML('beforeend',html);});}
+function saveWorkout(){const data={date:date.value,day:current,body:body.value,energy:energy.value,notes:notes.value,items:[]};plans[current].forEach((ex,i)=>{let sets=[];for(let s=1;s<=3;s++)sets.push({kg:document.getElementById(`e${i}s${s}kg`).value,reps:document.getElementById(`e${i}s${s}r`).value});data.items.push({name:ex[0],sets});});let all=JSON.parse(localStorage.getItem('gymPPL')||'[]');all.unshift(data);localStorage.setItem('gymPPL',JSON.stringify(all.slice(0,50)));showHistory();alert('Gespeichert ✅');}
+function clearForm(){document.querySelectorAll('input').forEach(x=>{if(!['date','day'].includes(x.id))x.value=''});notes.value='';}
+function showHistory(){let all=JSON.parse(localStorage.getItem('gymPPL')||'[]');history.innerHTML=all.length?'':'Noch keine Einträge.';all.slice(0,6).forEach(w=>{let top=w.items.slice(0,3).map(it=>`${it.name}: ${it.sets.map(s=>s.kg&&s.reps?`${s.kg}×${s.reps}`:'-').join(' | ')}`).join('<br>');history.innerHTML+=`<div class="historyItem"><b>${w.date} – ${w.day}</b> <span class="pill">Energie ${w.energy||'-'}/10</span><br>${top}</div>`});}
+render();showHistory();
+</script>
+</body>
+</html>
