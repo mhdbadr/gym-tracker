@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1eb" />
+  <title>Training erfassen | StudioCoach</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">SC</span><span>StudioCoach</span></a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="index.html">Start</a>
+      <a href="programm.html">Programm</a>
+      <a class="active" href="training.html">Training</a>
+      <a href="historie.html">Historie</a>
+      <a href="praxis.html">Praxis</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="page-title compact-title">
+      <p class="eyebrow">Trainingslog</p>
+      <h1>Training erfassen</h1>
+      <p class="lead">Im Gym öffnen, Satz für Satz eintragen, speichern und beim nächsten Mal genau wissen, was zu tun ist.</p>
+    </section>
+
+    <section class="dashboard" aria-label="Trainingsübersicht">
+      <article class="metric"><span>Gespeicherte Einheiten</span><strong id="metricSessions">0</strong></article>
+      <article class="metric"><span>Letztes Training</span><strong id="metricLast">-</strong></article>
+      <article class="metric"><span>Wochenvolumen</span><strong id="metricWeekVolume">0 kg</strong></article>
+      <article class="metric"><span>Aktueller Fokus</span><strong id="metricFocus">Technik</strong></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <div><p class="section-kicker">Vorbereitung</p><h2>Einheit</h2></div>
+        <span id="sessionStatus" class="status-pill">Nicht gespeichert</span>
+      </div>
+
+      <div class="form-grid">
+        <label>Trainingssplit
+          <select id="trainingType">
+            <option value="Push">Push</option>
+            <option value="Pull">Pull</option>
+            <option value="Legs">Legs</option>
+          </select>
+        </label>
+        <label>Datum <input id="trainingDate" type="date" /></label>
+        <label>Körpergewicht (kg) <input id="bodyWeight" type="number" min="0" step="0.1" placeholder="z. B. 78.4" /></label>
+        <label>Energie (1-10) <input id="energy" type="number" min="1" max="10" step="1" placeholder="z. B. 8" /></label>
+        <label>Schlaf (Stunden) <input id="sleep" type="number" min="0" max="14" step="0.5" placeholder="z. B. 7.5" /></label>
+        <label>Ziel der Einheit
+          <select id="sessionGoal">
+            <option value="Muskelaufbau">Muskelaufbau</option>
+            <option value="Kraftaufbau">Kraftaufbau</option>
+            <option value="Technik">Technik</option>
+            <option value="Deload">Deload</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="button-row">
+        <button id="loadPlanBtn" class="btn primary" type="button">Plan laden</button>
+        <button id="addExerciseBtn" class="btn secondary" type="button">Übung hinzufügen</button>
+        <button id="clearFormBtn" class="btn ghost" type="button">Formular leeren</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <div><p class="section-kicker">Arbeitsplan</p><h2>Übungen und Sätze</h2></div>
+        <span id="exerciseCount" class="status-pill">0 Übungen</span>
+      </div>
+      <div id="exerciseList" class="exercise-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <div><p class="section-kicker">Nachbereitung</p><h2>Notizen</h2></div>
+      </div>
+      <div class="note-grid">
+        <label>Trainingsnotizen
+          <textarea id="notes" rows="5" placeholder="Technik, Schmerzen, Pump, Gerätebelegung, Übung austauschen, nächstes Ziel..."></textarea>
+        </label>
+        <div class="coach-box">
+          <h3>Entscheidung nach der Einheit</h3>
+          <p>Wenn alle Arbeitssätze im Zielbereich liegen und die letzte Wiederholung technisch sauber war, Gewicht beim nächsten Mal leicht erhöhen.</p>
+          <p>Bei Schmerzen, unsauberer Technik oder RPE 10: Gewicht reduzieren und Bewegungsqualität priorisieren.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="action-panel">
+      <button id="saveSessionBtn" class="btn primary" type="button">Training speichern</button>
+      <button id="downloadTxtBtn" class="btn secondary" type="button">Aktuelle Einheit als TXT</button>
+      <button id="downloadCsvBtn" class="btn secondary" type="button">Aktuelle Einheit als CSV</button>
+      <button id="downloadAllTxtBtn" class="btn secondary" type="button">Alle Einheiten als TXT</button>
+    </section>
+  </main>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
