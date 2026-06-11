@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1eb" />
+  <title>Historie | StudioCoach</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">SC</span><span>StudioCoach</span></a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="index.html">Start</a>
+      <a href="programm.html">Programm</a>
+      <a href="training.html">Training</a>
+      <a class="active" href="historie.html">Historie</a>
+      <a href="praxis.html">Praxis</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="page-title compact-title">
+      <p class="eyebrow">Dokumentation</p>
+      <h1>Trainingshistorie</h1>
+      <p class="lead">Gespeicherte Einheiten durchsuchen, laden, exportieren oder löschen.</p>
+    </section>
+
+    <section class="dashboard" aria-label="Trainingsübersicht">
+      <article class="metric"><span>Gespeicherte Einheiten</span><strong id="metricSessions">0</strong></article>
+      <article class="metric"><span>Letztes Training</span><strong id="metricLast">-</strong></article>
+      <article class="metric"><span>Wochenvolumen</span><strong id="metricWeekVolume">0 kg</strong></article>
+      <article class="metric"><span>Aktueller Fokus</span><strong id="metricFocus">Technik</strong></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">
+        <div><p class="section-kicker">Archiv</p><h2>Gespeicherte Trainings</h2></div>
+        <button id="deleteAllBtn" class="btn danger" type="button">Alle löschen</button>
+      </div>
+      <div class="history-tools">
+        <label>Suche <input id="historySearch" type="search" placeholder="Übung, Split oder Datum suchen" /></label>
+        <label>Filter
+          <select id="historyFilter">
+            <option value="Alle">Alle</option>
+            <option value="Push">Push</option>
+            <option value="Pull">Pull</option>
+            <option value="Legs">Legs</option>
+          </select>
+        </label>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+  </main>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
